@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#991b1b">
+  <title>Manas College — Resume Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#"><span class="brand-mark">M</span><span>MANAS <span class="brand-light">COLLEGE</span><small>RESUME STUDIO</small></span></a>
+  <div class="top-actions"><span class="save-state" id="saveState">All changes saved locally</span><button class="btn btn-ghost" id="newResumeBtn">＋ New resume</button><button class="btn btn-primary" id="downloadBtn">Download PDF ↗</button></div>
+</header>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="side-label">WORKSPACE</div>
+    <button class="nav-item active" data-tab="builder">✦ <span>Resume builder</span></button>
+    <button class="nav-item" data-tab="templates">▦ <span>Templates</span></button>
+    <button class="nav-item" data-tab="ats">◎ <span>ATS checker</span></button>
+    <button class="nav-item" data-tab="library">▤ <span>My resumes</span></button>
+    <div class="side-divider"></div><div class="side-label">YOUR DOCUMENT</div>
+    <div class="resume-switcher"><label for="resumeSelect">Current resume</label><select id="resumeSelect"></select></div>
+    <div class="side-tip"><b>Pro tip</b><p>Tailor your resume to each job. Keep one master resume, then create a targeted copy.</p></div>
+    <div class="side-footer">ELEVATECV STUDIO <span>v2.0</span></div>
+  </aside>
+
+  <main class="main-area">
+    <section class="workspace" id="builderTab">
+      <div class="page-heading"><div><div class="eyebrow">YOUR CAREER, PRESENTED BETTER</div><h1>Resume builder</h1><p>Build a clear, confident resume that gets noticed.</p></div><div class="step-pill"><span class="live-dot"></span> Auto-save on</div></div>
+      <div class="builder-grid">
+        <div class="editor-panel">
+          <div class="editor-toolbar"><div><b>Resume details</b><small>Fill in what matters. Leave anything irrelevant blank.</small></div><button class="text-btn" id="expandAllBtn">Expand all</button></div>
+          <div class="form-section open">
+            <button class="section-head"><span class="section-icon">01</span><span><b>Personal information</b><small>Your contact details and professional identity</small></span><span class="chevron">⌄</span></button>
+            <div class="section-body">
+              <div class="field-grid two"><label>Full name<input data-field="name" placeholder="e.g. Aditi Sharma"></label><label>Professional title<input data-field="title" placeholder="e.g. Product Designer"></label></div>
+              <div class="photo-upload-row">
+                <div class="photo-preview" id="photoPreview">PHOTO</div>
+                <div class="photo-controls">
+                  <label>Profile photo <input type="file" id="photoInput" accept="image/png,image/jpeg,image/webp"></label>
+                  <small>Optional. Use a clear, professional headshot (JPG, PNG or WebP, up to 3 MB).</small>
+                  <button type="button" class="text-btn" id="removePhotoBtn">Remove photo</button>
+                </div>
+              </div>
+              <div class="field-grid two"><label>Email<input data-field="email" type="email" placeholder="you@example.com"></label><label>Phone<input data-field="phone" placeholder="+91 98765 43210"></label></div>
+              <div class="field-grid two"><label>Location<input data-field="location" placeholder="City, Country"></label><label>Website / Portfolio<input data-field="website" placeholder="yourportfolio.com"></label></div>
+              <div class="field-grid two"><label>LinkedIn<input data-field="linkedin" placeholder="linkedin.com/in/username"></label><label>GitHub<input data-field="github" placeholder="github.com/username"></label></div>
+              <label>Professional summary<textarea data-field="summary" rows="4" placeholder="Write 2–4 lines about your experience, strengths and the value you bring."></textarea></label>
+            </div>
+          </div>
+          <div class="form-section open">
+            <button class="section-head"><span class="section-icon">02</span><span><b>Work experience</b><small>Show impact, not just responsibilities</small></span><span class="chevron">⌄</span></button>
+            <div class="section-body"><div id="experienceList"></div><button class="add-btn" data-add="experience">＋ Add experience</button></div>
+          </div>
+          <div class="form-section">
+            <button class="section-head"><span class="section-icon">03</span><span><b>Education</b><small>Degrees, schools and relevant coursework</small></span><span class="chevron">⌄</span></button>
+            <div class="section-body"><div id="educationList"></div><button class="add-btn" data-add="education">＋ Add education</button></div>
+          </div>
+          <div class="form-section">
+            <button class="section-head"><span class="section-icon">04</span><span><b>Skills</b><small>Relevant tools, strengths and keywords</small></span><span class="chevron">⌄</span></button>
+            <div class="section-body"><label>Skills (separate with commas)<textarea data-field="skills" rows="3" placeholder="Project management, Python, SQL, Figma, Communication..."></textarea></label><div class="helper">Put the most relevant skills first. Avoid skill bars and unsupported ratings.</div></div>
+          </div>
+          <div class="form-section">
+            <button class="section-head"><span class="section-icon">05</span><span><b>Projects</b><small>Proof of what you can build and deliver</small></span><span class="chevron">⌄</span></button>
+            <div class="section-body"><div id="projectsList"></div><button class="add-btn" data-add="projects">＋ Add project</button></div>
+          </div>
+          <div class="form-section">
+            <button class="section-head"><span class="section-icon">06</span><span><b>Certifications & courses</b><small>Relevant learning and credentials</small></span><span class="chevron">⌄</span></button>
+            <div class="section-body"><div id="certificationsList"></div><button class="add-btn" data-add="certifications">＋ Add certification</button></div>
+          </div>
+          <div class="form-section">
+            <button class="section-head"><span class="section-icon">07</span><span><b>Additional details</b><small>Languages, awards, volunteering and more</small></span><span class="chevron">⌄</span></button>
+            <div class="section-body">
+              <label>Languages<textarea data-field="languages" rows="2" placeholder="English (Fluent), Hindi (Native)"></textarea></label>
+              <label>Achievements & awards<textarea data-field="awards" rows="2" placeholder="Award, recognition, measurable achievement..."></textarea></label>
+              <label>Volunteer experience<textarea data-field="volunteer" rows="2" placeholder="Organization — role — contribution"></textarea></label>
+              <label>Interests (optional)<input data-field="interests" placeholder="Open-source, mentoring, photography"></label>
+            </div>
+          </div>
+          <div class="form-section">
+            <button class="section-head"><span class="section-icon">08</span><span><b>Job description targeting</b><small>Tailor this resume for a specific opportunity</small></span><span class="chevron">⌄</span></button>
+            <div class="section-body"><label>Paste job description<textarea id="jobDescription" rows="6" placeholder="Paste the full job description here..."></textarea></label><button class="btn btn-primary full" id="tailorBtn">✦ Analyze & tailor my resume</button><p class="helper">This tool identifies keywords and suggests profile edits. Review every suggestion and never add skills or experience you don't have.</p><div id="tailorResults"></div></div>
+          </div>
+        </div>
+        <div class="preview-panel">
+          <div class="preview-toolbar"><div><b>Live preview</b><small id="templateName">Modern Professional</small></div><div class="preview-tools"><button class="icon-btn" id="zoomOut" title="Zoom out">−</button><button class="icon-btn" id="zoomIn" title="Zoom in">＋</button></div></div>
+          <div class="paper-wrap"><article id="resumePreview" class="resume-paper t-modern"></article></div>
+          <div class="preview-foot"><span>Designed for clarity & ATS readability</span><span>A4 · <span id="zoomLabel">100%</span></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace hidden" id="templatesTab">
+      <div class="page-heading"><div><div class="eyebrow">MAKE THE RIGHT FIRST IMPRESSION</div><h1>Choose your template</h1><p>15 carefully structured layouts. Every design prioritizes readable content.</p></div></div>
+      <div class="template-grid" id="templateGrid"></div>
+    </section>
+    <section class="workspace hidden" id="atsTab">
+      <div class="page-heading"><div><div class="eyebrow">BEAT THE KEYWORD GAP</div><h1>ATS resume checker</h1><p>Compare your resume against a job description before you apply.</p></div></div>
+      <div class="ats-layout"><div class="card"><h3>Job description</h3><textarea id="atsJob" rows="13" placeholder="Paste the job description you want to target..."></textarea><button class="btn btn-primary full" id="checkAtsBtn">Check my resume</button></div><div class="card ats-result" id="atsResult"><div class="empty-state"><div class="empty-icon">◎</div><h3>Your ATS insights will appear here</h3><p>Paste a job description and run the checker to see keyword coverage and practical suggestions.</p></div></div></div>
+      <p class="disclaimer">ATS score is an estimate based on text keyword overlap, not a real employer ATS result or a guarantee of selection.</p>
+    </section>
+    <section class="workspace hidden" id="libraryTab">
+      <div class="page-heading"><div><div class="eyebrow">YOUR CAREER DOCUMENTS</div><h1>My resumes</h1><p>Create tailored versions for different roles and keep them organized.</p></div><button class="btn btn-primary" id="libraryNewBtn">＋ Create resume</button></div>
+      <div class="library-actions"><button class="btn btn-secondary" id="exportDataBtn">Export backup (.json)</button><label class="btn btn-secondary file-label">Import backup<input type="file" id="importDataInput" accept=".json,application/json" hidden></label><button class="btn btn-danger" id="clearDataBtn">Clear local data</button></div>
+      <div class="resume-library" id="resumeLibrary"></div>
+      <div class="storage-note"><b>About saving:</b> This GitHub Pages edition saves data in the current browser on this device. Different users have separate private browser storage. To sync accounts across devices or manage shared users, connect the optional Supabase backend described in README.</div>
+    </section>
+  </main>
+</div>
+<div id="toast" class="toast"></div>
+<script src="app.js"></script>
+</body></html>
